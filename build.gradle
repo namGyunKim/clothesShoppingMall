@@ -37,8 +37,6 @@ dependencies {
 	implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '7.0.91'
 // https://mvnrepository.com/artifact/javax.servlet/jstl
 	implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
-	// https://mvnrepository.com/artifact/javax.servlet/jstl
-	implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
 // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jasper
 	implementation group: 'org.apache.tomcat', name: 'tomcat-jasper', version: '9.0.41'
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail
