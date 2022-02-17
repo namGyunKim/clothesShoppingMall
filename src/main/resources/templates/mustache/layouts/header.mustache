@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">-->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+
+    <title>오서김제곱 커피가게</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: white;opacity: 0.8;border-bottom: 1px solid black;">
+    <a class="navbar-brand" href="/hi" style="margin-left: 200px"><img src="/images/logo.jpg" style="height: 70px;width: 100px"/></a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto" style="margin-right: 50px">
+            {{^admin}}
+                {{#userId}}
+                    <button type="submit" class="btn btn-primary ml-3" onclick="location.href='/members/edit';">회원정보 수정</button>
+                    <button type="button" class="btn btn-primary ml-3" onclick="location.href='/go/delete';">회원탈퇴</button>
+                {{/userId}}
+            {{/admin}}
+            {{^userId}}
+                <button type="button" class="btn btn-primary ml-3" onclick="location.href='/login';">로그인</button>
+                <button type="button" class="btn btn-primary ml-3" onclick="location.href='/new';">회원가입</button>
+                <!--<button type="button" class="btn btn-primary ml-3" onclick="location.href='/coffees/latte';">주문용 커피 메뉴</button>-->
+            {{/userId}}
+
+            {{#admin}}
+                <!--<button type="button" class="btn btn-primary ml-3" onclick="location.href='/coffees/index';">관리자용 커피 메뉴</button>-->
+                <button type="button" class="btn btn-primary ml-3" onclick="location.href='/toadmin';">관리자 화면</button>
+            {{/admin}}
+            {{#userId}}
+                <button type="button" class="btn btn-primary ml-3" onclick="location.href='/chat';">채팅방</button>
+                <button type="button" class="btn btn-primary ml-3" onclick="location.href='/logout';">로그아웃</button>
+                <button type="button" class="btn btn-primary ml-3" onclick="location.href='/coffee/latte';">주문용 커피 메뉴</button>
+                <button type="button" class="btn btn-primary ml-3" onclick="location.href='/coffee/basketorder/{{userId}}'">장바구니로 이동</button>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        주문 메뉴
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                        <a class="dropdown-item" href="/coffee/latte">LATTE & COFFEE</a>
+                        <a class="dropdown-item" href="/coffee/tea">TEA</a>
+                        <a class="dropdown-item" href="/coffee/ade">ADE</a>
+
+                    </div>
+                </li>
+            {{/userId}}
+
+
+        </ul>
+    </div>
+</nav>
+
+<!--alert msg msg라는 변수가 있다면-->
+{{#msg}}
+    <div class="alert alert-primary" role="alert">
+        {{msg}}
+    </div>
+{{/msg}}
+<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+</body>
+</html>

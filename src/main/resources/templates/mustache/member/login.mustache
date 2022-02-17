@@ -1,0 +1,47 @@
+{{>mustache/layouts/header}}
+
+<style>
+    footer{
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        height: 400px;
+        width: 100%;
+
+    }
+
+</style>
+<!--로그인이 되어있다면-->
+{{#userId}}
+    <div class="container" style="text-align: center;"><br>
+        <h1>로그인</h1>
+        <form action="members/edit">
+            <button type="button" class="btn btn-primary btn-w" onclick="location.href='/logout'">로그아웃</button><br>
+            <button type="submit" class="btn btn-primary btn-w" >회원정보 수정</button>
+        </form>
+    </div>
+{{/userId}}
+<!--로그인이 되어있지 않다면-->
+{{^userId}}
+    <div class="container"><br>
+        <h1>로그인</h1>
+    <form action="/login2" method="post">
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">이메일 주소 입력</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="id" required>
+            <div id="emailHelp" class="form-text">coffee@aaaa.com 형식으로 입력해주세요</div>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-w">로그인</button>
+        <button type="button" class="btn btn-primary btn-w" onclick="location.href='/new';">회원가입</button>
+    </form>
+    <br>
+{{/userId}}
+</div>
+<footer>
+{{>mustache/layouts/footer}}
+</footer>

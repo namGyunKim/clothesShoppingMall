@@ -1,0 +1,9 @@
+create table cmember(
+    id varchar2(50),
+    password varchar2(50),
+    tel varchar2(15),
+    address varchar2(100),
+    grade varchar2(10),
+    answer varchar2(50),
+    constraint cmember__pk primary key (id)
+);

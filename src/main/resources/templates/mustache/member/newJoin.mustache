@@ -1,0 +1,122 @@
+{{>mustache/layouts/header}}
+
+<!--자바스크립트-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<script>
+    function daumPost(){
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+                // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+                console.log("선택 : "+data.userSelectedType)
+                console.log("로드 : "+data.roadAddress)
+                console.log("지번 : "+data.jibunAddress)
+                console.log("우편번호 : "+data.zonecode)
+
+                var addr = ""
+                if(data.userSelectedType == 'R'){
+                    addr = data.roadAddress
+                }else{
+                    addr = data.jibunAddress
+                }
+                document.getElementById("addr1").value = data.zonecode
+                $("#addr2").val(addr)
+                $("#addr3").focus()
+            }
+        }).open();
+    }
+
+
+</script>
+
+{{^idcheck}}
+<div class="container"><br>
+    <h1>회원가입</h1>
+    <form action="/new/idcheck" method="post">
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">이메일 주소 입력</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="id" required>
+            <div id="emailHelp" class="form-text">coffee@aaaa.com 형식으로 입력해주세요(중복체크 후 회원가입 가능)</div>
+            <button type="submit" class="btn btn-primary" style="margin-top: 10px;width: 100%">아이디 중복체크</button>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="password" required>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password 확인</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="password2" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">전화번호</label>
+            <input type="tel" class="form-control" id="exampleInputPassword1" name="tel" required>
+        </div>
+             <input type="hidden" class="form-control" id="exampleInputPassword1" name="address" required value="tmpaddress">
+
+<!--            등급-->
+        <div class="mb-3">
+            <input type="hidden" class="form-control" id="exampleInputPassword1" name="grade" required value="D">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">보물 1호는?</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" name="answer" required>
+        </div>
+
+    </form>
+</div>
+{{/idcheck}}
+
+
+<div class="container">
+    <form action="/new2" method="post">
+        {{#idcheck}}
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">이메일 주소 입력</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="id" required readonly value="{{idcheck}}">
+            <div id="emailHelp" class="form-text">coffee@aaaa.com 형식으로 입력해주세요</div>
+        </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" name="password" required readonly value="{{password}}">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" name="password2" required readonly value="{{password}}">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">전화번호</label>
+                <input type="tel" class="form-control" id="exampleInputPassword1" name="tel" required readonly value="{{tel}}">
+            </div>
+
+            <div class="mb-3">
+                <input type="text" readonly id="addr1" name="address1" class="form-control">
+                <input type="text" readonly id="addr2" name="address2" class="form-control">
+                <input type="text" id="addr3" name="address3" class="form-control">
+                <br>
+                <button type="button" onclick="daumPost()" class="btn btn-primary">
+                    주소찾기
+                </button>
+            </div>
+            <!-- <label for="exampleInputPassword1" class="form-label">주소</label>
+             <input type="text" class="form-control" id="exampleInputPassword1" name="address" required>-->
+
+            <!--            등급-->
+            <div class="mb-3">
+                <input type="hidden" class="form-control" id="exampleInputPassword1" name="grade" required value="D">
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">보물 1호는?</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" name="answer" required readonly value="{{answer}}">
+            </div>
+            <button type="submit" class="btn btn-primary">회원가입</button>
+
+        {{/idcheck}}
+    </form>
+</div>
+{{>mustache/layouts/footer}}
