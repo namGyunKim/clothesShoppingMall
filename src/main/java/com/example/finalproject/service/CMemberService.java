@@ -76,7 +76,7 @@ public class CMemberService {
         if (dto.getId().equals(adminsId) && dto.getPassword().equals(adminsPassword)) {
             session.setAttribute("admin", dto.getId());
             session.setAttribute("userId", dto.getId());
-            strReturn="member/admins";
+            strReturn="mustache/admin/index";
         } else if (cMemberRepository.existsById(dto.getId())) {
             CMember membersEntity = cMemberRepository.findById(dto.getId()).orElse(null);
             log.info(String.valueOf(membersEntity));

@@ -1,0 +1,29 @@
+{{>mustache/layouts/header}}
+<div class="container"><br>
+    <h1>전체 고객 목록</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">password</th>
+            <th scope="col">tel</th>
+            <th scope="col">ddress</th>
+            <th scope="col">grade</th>
+            <th scope="col">answer</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#membersList}}
+            <tr>
+                <th> {{id}}</th>
+                <td>{{password}}</td>
+                <td>{{tel}}</td>
+                <td>{{address}}</td>
+                <td>{{grade}}</td>
+                <td>{{answer}}</td>
+            </tr>
+        {{/membersList}}
+        </tbody>
+    </table>
+</div>
+{{>mustache/layouts/footer}}
