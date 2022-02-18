@@ -1,6 +1,7 @@
 package com.example.finalproject.Controller;
 
 import com.example.finalproject.dto.CMemberDto;
+import com.example.finalproject.entity.CMember;
 import com.example.finalproject.repository.CMemberRepository;
 import com.example.finalproject.service.CMemberService;
 import lombok.extern.slf4j.Slf4j;
@@ -57,7 +58,7 @@ public class CMemberController {
                                @RequestParam(value = "address1",required = false) String address1,
                                @RequestParam(value = "address2",required = false) String address2,
                                @RequestParam(value = "address3",required = false) String address3){
-        String address=address1+address2+address3;
+        String address=address1+address2+"    "+address3;
         dto.setAddress(address);
         log.info(String.valueOf(dto));
         String msg=cMemberService.MemberJoin(dto);
@@ -111,11 +112,22 @@ public class CMemberController {
     }
 
     @GetMapping("/member/info")
-    public String memberInfo(HttpSession httpSession){
+    public String memberInfo(HttpSession httpSession,Model model){
         String thisId = (String) httpSession.getAttribute("userId");
         log.info("현재 정보 수정하려는 유저 아이디는 :"+thisId);
+        CMember cMember = cMemberRepository.findById(thisId).orElse(null);
+        model.addAttribute("memberInfo", cMember);
         return "mustache/member/info";
     }
+    @GetMapping("/go/delete")
+    public String goDelete(){
+        return "mustache/member/delete";
+    }
 
+    @GetMapping("/member/delete/{id}")
+    public String delete(@PathVariable String id,HttpSession session){
+        cMemberService.MemberDelete(id,session);
+        return "redirect:/login";
+    }
 
 }

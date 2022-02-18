@@ -93,6 +93,17 @@ public class CMemberService {
         }
         return strReturn;
     }
-
+    public void MemberDelete(String id,HttpSession session){
+        //        삭제할 데이터 가져오기
+        CMember membersEntity = cMemberRepository.findById(id).orElse(null);
+        log.info(String.valueOf(membersEntity));
+//        데이터 삭제
+        cMemberRepository.deleteById(id);
+//        세션 삭제
+        session.removeAttribute("userId");
+        session.removeAttribute("userPassword");
+        session.removeAttribute("admin");
+        session.setAttribute("deleteMsg","ok");
+    }
 
 }

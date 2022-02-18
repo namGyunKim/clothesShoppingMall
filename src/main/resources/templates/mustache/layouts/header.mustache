@@ -14,7 +14,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: white;opacity: 0.8;border-bottom: 1px solid black;">
-    <a class="navbar-brand" href="/hi" style="margin-left: 200px"><img src="/images/logo.jpg" style="height: 70px;width: 100px"/></a>
+    <a class="navbar-brand" href="/" style="margin-left: 200px"><img src="/images/logo.jpg" style="height: 70px;width: 100px"/></a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -25,7 +25,6 @@
             {{^admin}}
                 {{#userId}}
                     <button type="button" class="btn btn-primary ml-3" onclick="location.href='/member/info';">내 정보</button>
-                    <button type="button" class="btn btn-primary ml-3" onclick="location.href='/go/delete';">회원탈퇴</button>
                 {{/userId}}
             {{/admin}}
             {{^userId}}

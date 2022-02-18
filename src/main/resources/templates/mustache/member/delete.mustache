@@ -1,0 +1,13 @@
+{{>mustache/layouts/header}}
+{{>mustache/layouts/infoSide}}
+<!-- 9단길이의 첫번째 열 -->
+<div class="col-md-9">
+    <div class="jumbotron">
+        <h1>회원탈퇴</h1>
+        <h2>정말 회원탈퇴 하시겠습니까?</h2>
+        <button type="button" class="btn btn-primary" onclick="location.href='/member/delete/{{userId}}';">회원탈퇴</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='/';">메인화면</button>
+    </div>
+</div>
+</div>
+{{>mustache/layouts/footer}}
