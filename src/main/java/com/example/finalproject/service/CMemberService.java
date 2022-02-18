@@ -138,4 +138,15 @@ public class CMemberService {
         log.info(array[2]);
     }
 
+    public boolean idCheck(String id){
+        boolean idCheck=cMemberRepository.existsById(id);
+        if(idCheck){
+            log.info(id+"는 존재하는 아이디");
+            return true;
+        }
+        else{
+            log.info(id+"는 존재하지 않는 아이디");
+            return false;
+        }
+    }
 }

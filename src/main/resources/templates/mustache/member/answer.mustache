@@ -1,0 +1,11 @@
+{{>mustache/layouts/header}}
+<div class="container">
+    <form method="post" action="/answer/check">
+        <div class="mb-3">
+            <label class="form-label">당신의 보물 1호는?</label>
+            <input type="text" class="form-control"  name="answer" required>
+            <button class="btn btn-primary" type="submit">확인</button>
+        </div>
+    </form>
+</div>
+{{>mustache/layouts/footer}}

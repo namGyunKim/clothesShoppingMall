@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 @Controller
@@ -136,6 +137,35 @@ public class CMemberController {
     public String memberEdit(Model model,HttpSession httpSession){
         cMemberService.MemberEdit(model,httpSession);
         return "mustache/member/edit";
+    }
+
+    @RequestMapping("/member/passwordFind")
+    public String passwordFind(){
+        return "mustache/member/passwordFind";
+    }
+
+    @RequestMapping("/id/check")
+    public String idCheck(@RequestParam(value = "id",required = false) String id,
+                          RedirectAttributes rttr,
+                          Model model,
+                          HttpServletResponse response) throws IOException {
+        boolean idCheck= cMemberService.idCheck(id);
+
+        if(idCheck){
+            model.addAttribute("findId", id);
+            return "mustache/member/answer";
+        }
+        else {
+            //UTF-8인코딩 위에서 받아온 매개변수 HttpServletResponse
+            response.setContentType("text/html; charset=UTF-8");
+            //PrintStream에 있는 모든 출력 메서드 구현돼있는 PrintWriter
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert(\"존재하지 않는 아이디 입니다.\")</script>");
+            //모든 스트림 요소를 지움
+            out.flush();
+
+            return "mustache/member/passwordFind";
+        }
     }
 
 }
