@@ -79,4 +79,22 @@ public class AdminController {
         return "redirect:/clothes/index";
     }
 
+    @GetMapping("/clothes/delete")
+    public String delete(Model model){
+        //        모든 상품 목록을 가져온다
+        List<Clothes> clothesList = clothesRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
+//        가져온 상품목록을 뷰로 전달
+        model.addAttribute("clothesList", clothesList);
+//        뷰 페이지 설정
+        return "mustache/admin/clothesDelete";
+    }
+
+    @GetMapping("/clothes/delete/{id}")
+    public String delete(@PathVariable Long id,RedirectAttributes rttr){
+        adminService.CoffeeKateDelete(id);
+        rttr.addFlashAttribute("msg", id + "번상품의 데이터가 삭제되었습니다.");
+//        뷰 페이지 설정
+        return "redirect:/clothes/delete";
+    }
+
 }

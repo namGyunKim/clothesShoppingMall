@@ -16,3 +16,12 @@ create table clothes(
     kate varchar2(50),
     constraint clothes__pk primary key(id)
 );
+
+create table clothesG(
+    id number(10),
+    title varchar2(50),
+    content varchar2(50),
+    price number(10),
+    kate varchar2(50),
+    constraint clothesG__pk primary key(id)
+);
