@@ -37,9 +37,9 @@
     <form action="/new/idcheck" method="post">
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">이메일 주소 입력</label>
+            <button type="submit" class="btn btn-primary" style="margin-left: 10px;">아이디 중복체크</button>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="id" required>
             <div id="emailHelp" class="form-text">coffee@aaaa.com 형식으로 입력해주세요(중복체크 후 회원가입 가능)</div>
-            <button type="submit" class="btn btn-primary" style="margin-top: 10px;width: 100%">아이디 중복체크</button>
         </div>
 
         <div class="mb-3">
@@ -93,10 +93,10 @@
                 <input type="tel" class="form-control" id="exampleInputPassword1" name="tel" required readonly value="{{tel}}">
             </div>
 
-            <div class="mb-3">
-                <input type="text" readonly id="addr1" name="address1" class="form-control">
-                <input type="text" readonly id="addr2" name="address2" class="form-control">
-                <input type="text" id="addr3" name="address3" class="form-control">
+            <div class="row">
+                <input type="text" readonly id="addr1" name="address1" class="form-control col-md-1 ml-1">
+                <input type="text" readonly id="addr2" name="address2" class="form-control col-md-5">
+                <input type="text" id="addr3" name="address3" class="form-control col-md-1">
                 <br>
                 <button type="button" onclick="daumPost()" class="btn btn-primary">
                     주소찾기
