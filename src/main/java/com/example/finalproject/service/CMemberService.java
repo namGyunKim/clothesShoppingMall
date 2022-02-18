@@ -9,7 +9,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @Service
@@ -148,5 +151,29 @@ public class CMemberService {
             log.info(id+"는 존재하지 않는 아이디");
             return false;
         }
+    }
+    public boolean answerCheck(String id,String answer){
+        CMember cMember = cMemberRepository.findById(id).orElse(null);
+        if(cMember.getAnswer().equals(answer)){
+            log.info("답변 일치");
+            return true;
+        }
+        else{
+            log.info("답변 불일치");
+            return false;
+        }
+    }
+    public void alertMsg(String msg, HttpServletResponse response) throws IOException {
+        String msg1="<script>alert(\"";
+        String msg2="\")</script>";
+        msg= msg1+msg+msg2;
+
+        //UTF-8인코딩 위에서 받아온 매개변수 HttpServletResponse
+        response.setContentType("text/html; charset=UTF-8");
+        //PrintStream에 있는 모든 출력 메서드 구현돼있는 PrintWriter
+        PrintWriter out = response.getWriter();
+        out.println(msg);
+        //모든 스트림 요소를 지움
+        out.flush();
     }
 }

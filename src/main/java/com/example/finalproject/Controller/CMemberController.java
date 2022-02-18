@@ -77,13 +77,7 @@ public class CMemberController {
             log.info("deleteMsg :"+deleteMsg);
         }
         else if (deleteMsg.equals("ok")){
-            //UTF-8인코딩 위에서 받아온 매개변수 HttpServletResponse
-            response.setContentType("text/html; charset=UTF-8");
-            //PrintStream에 있는 모든 출력 메서드 구현돼있는 PrintWriter
-            PrintWriter out = response.getWriter();
-            //자바스크립트로 알람창 띄움
-            out.println("<script>alert(\"회원탈퇴 되었습니다.\")</script>");
-            out.flush();
+            cMemberService.alertMsg("회원탈퇴 되었습니다.",response);
             session.removeAttribute("deleteMsg");
         }
 
@@ -156,16 +150,40 @@ public class CMemberController {
             return "mustache/member/answer";
         }
         else {
-            //UTF-8인코딩 위에서 받아온 매개변수 HttpServletResponse
-            response.setContentType("text/html; charset=UTF-8");
-            //PrintStream에 있는 모든 출력 메서드 구현돼있는 PrintWriter
-            PrintWriter out = response.getWriter();
-            out.println("<script>alert(\"존재하지 않는 아이디 입니다.\")</script>");
-            //모든 스트림 요소를 지움
-            out.flush();
+            cMemberService.alertMsg("존재하지 않는 아이디 입니다.",response);
 
             return "mustache/member/passwordFind";
         }
+    }
+
+    @RequestMapping("/answer/check")
+    public String answerCheck(@RequestParam(value = "id",required = false) String id,
+                              @RequestParam(value = "answer",required = false) String answer,
+                          RedirectAttributes rttr,
+                          Model model,
+                          HttpServletResponse response) throws IOException {
+        boolean answerCheck = cMemberService.answerCheck(id, answer);
+
+        if(answerCheck){
+            model.addAttribute("findId", id);
+            return "mustache/member/passwordSet";
+        }
+        else {
+            model.addAttribute("findId", id);
+            cMemberService.alertMsg("답변이 일치하지 않습니다.",response);
+
+            return "mustache/member/answer";
+        }
+    }
+
+    @RequestMapping("/passwordSet")
+    public String passwordSet(CMemberDto cMemberDto,HttpServletResponse response) throws IOException {
+        CMember cMember = cMemberRepository.findById(cMemberDto.getId()).orElse(null);
+        cMember.setPassword(cMemberDto.getPassword());
+        cMemberRepository.save(cMember);
+        log.info(String.valueOf(cMember));
+        cMemberService.alertMsg("비밀번호가 변경되었습니다.",response);
+        return "mustache/index";
     }
 
 }
