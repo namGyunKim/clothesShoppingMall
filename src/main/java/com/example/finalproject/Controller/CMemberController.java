@@ -90,4 +90,29 @@ public class CMemberController {
         return "mustache/member/login";
     }
 
+    @PostMapping("/login2")
+    public String login2(Model model, CMemberDto dto, RedirectAttributes rttr, HttpSession session) {
+
+        String strReturn=cMemberService.MemberLogin(model,dto, session);
+//        rttrMsg세션이 존재한다면
+        if(cMemberService.SessionExist("rttrMsg",session)){
+            rttr.addFlashAttribute("msg", session.getAttribute("rttrMsg"));
+            session.removeAttribute("rttrMsg");
+        }
+        return strReturn;
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session,RedirectAttributes rttr){
+
+        session.removeAttribute("userId");
+        session.removeAttribute("userPassword");
+        session.removeAttribute("admin");
+        rttr.addFlashAttribute("msg", "로그아웃 되었습니다");
+
+        return "redirect:/login";
+    }
+
+
+
 }
