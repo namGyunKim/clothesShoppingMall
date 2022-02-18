@@ -54,5 +54,11 @@ public class AdminController {
         rttr.addFlashAttribute("msg","상품등록 완료");
       return "redirect:/clothes/new";
     }
+    @RequestMapping("/clothes/index")
+    public String clothesIndex(Model model){
+        List<Clothes> clothesList = clothesRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
+        model.addAttribute("clothesList", clothesList);
+        return "mustache/admin/clothesAllView";
+    }
 
 }
