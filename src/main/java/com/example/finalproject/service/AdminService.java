@@ -38,4 +38,16 @@ public class AdminService {
         ClothesG saved = clothesGRepository.save(clothesG);
     }
 
+    public void recovery(Long id){
+//      복구할 데이터 가져오기
+        ClothesG clothesG = clothesGRepository.findById(id).orElse(null);
+        log.info(String.valueOf(clothesG));
+//        휴지통에서 삭제
+        clothesGRepository.deleteById(id);
+//        상품 목록에 복구
+        Clothes clothes = new Clothes(id, clothesG.getTitle(), clothesG.getContent(), clothesG.getPrice(),clothesG.getKate());
+        log.info(String.valueOf(clothes));
+        Clothes saved = clothesRepository.save(clothes);
+    }
+
 }

@@ -3,7 +3,9 @@ package com.example.finalproject.Controller;
 import com.example.finalproject.dto.ClothesDto;
 import com.example.finalproject.entity.CMember;
 import com.example.finalproject.entity.Clothes;
+import com.example.finalproject.entity.ClothesG;
 import com.example.finalproject.repository.CMemberRepository;
+import com.example.finalproject.repository.ClothesGRepository;
 import com.example.finalproject.repository.ClothesRepository;
 import com.example.finalproject.service.AdminService;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +30,8 @@ public class AdminController {
     ClothesRepository clothesRepository;
     @Autowired
     AdminService adminService;
+    @Autowired
+    ClothesGRepository clothesGRepository;
 
     @GetMapping("/toadmin")
     public String membersEdit(){
@@ -95,6 +99,24 @@ public class AdminController {
         rttr.addFlashAttribute("msg", id + "번상품의 데이터가 삭제되었습니다.");
 //        뷰 페이지 설정
         return "redirect:/clothes/delete";
+    }
+
+    @GetMapping("/garbage/clothes")
+    public String clothesGarbage(Model model){
+        //        모든 상품 목록을 가져온다
+        List<ClothesG> clothesGList = clothesGRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
+//        가져온 상품목록을 뷰로 전달
+        model.addAttribute("clothesList", clothesGList);
+//        뷰 페이지 설정
+        return "mustache/admin/clothesGarbage";
+    }
+
+    @GetMapping("/garbage/clothes/recovery/{id}")
+    public String coffeeGarbageRecovery(@PathVariable Long id, RedirectAttributes rttr) {
+        adminService.recovery(id);
+        rttr.addFlashAttribute("msg", id + "번 상품이 복구됨");
+//        뷰 페이지 설정
+        return "redirect:/garbage/clothes";
     }
 
 }
