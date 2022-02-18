@@ -64,7 +64,7 @@ public class CMemberController {
         log.info(String.valueOf(dto));
         String msg=cMemberService.MemberJoin(dto);
         rttr.addFlashAttribute("msg", msg);
-        return  "redirect:/login";
+        return  "redirect:/";
     }
 
     @GetMapping("/login")

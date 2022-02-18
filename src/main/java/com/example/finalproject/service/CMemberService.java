@@ -53,10 +53,18 @@ public class CMemberService {
         CMember members = dto.toEntity();
         log.info(String.valueOf(dto));
         log.info(String.valueOf(members));
+
+        if(cMemberRepository.existsById(dto.getId())){
+            msg = "회원정보 수정 완료";
+        }
+        else {
+            msg = "회원가입을 축하드립니다";
+
+        }
+
 //            Repository에게 Entity를 저장하게함
         CMember save = cMemberRepository.save(members);
         log.info(String.valueOf(save));
-        msg = "회원가입을 축하드립니다";
         return msg;
     }
     public String MemberLogin(Model model, CMemberDto dto, HttpSession session) {
