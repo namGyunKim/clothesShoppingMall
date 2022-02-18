@@ -24,7 +24,7 @@
         <ul class="navbar-nav ml-auto" style="margin-right: 50px">
             {{^admin}}
                 {{#userId}}
-                    <button type="submit" class="btn btn-primary ml-3" onclick="location.href='/members/edit';">회원정보 수정</button>
+                    <button type="button" class="btn btn-primary ml-3" onclick="location.href='/member/info';">내 정보</button>
                     <button type="button" class="btn btn-primary ml-3" onclick="location.href='/go/delete';">회원탈퇴</button>
                 {{/userId}}
             {{/admin}}
@@ -39,9 +39,7 @@
                 <button type="button" class="btn btn-primary ml-3" onclick="location.href='/toadmin';">관리자 화면</button>
             {{/admin}}
             {{#userId}}
-                <button type="button" class="btn btn-primary ml-3" onclick="location.href='/chat';">채팅방</button>
                 <button type="button" class="btn btn-primary ml-3" onclick="location.href='/logout';">로그아웃</button>
-                <button type="button" class="btn btn-primary ml-3" onclick="location.href='/coffee/latte';">주문용 커피 메뉴</button>
                 <button type="button" class="btn btn-primary ml-3" onclick="location.href='/coffee/basketorder/{{userId}}'">장바구니로 이동</button>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
