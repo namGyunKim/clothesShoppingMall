@@ -1,4 +1,39 @@
 {{>mustache/layouts/header}}
-<input id="input-b1" name="input-b1" type="file" class="file" data-browse-on-zone-click="true">
+<div class="container"><br>
+    <h1>회원가입</h1>
+    <form action="/new/idcheck" method="post">
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">이메일 주소 입력</label>
+            <button type="submit" class="btn btn-primary" style="margin-left: 10px;">아이디 중복체크</button>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="id" required>
+            <div id="emailHelp" class="form-text">coffee@aaaa.com 형식으로 입력해주세요(중복체크 후 회원가입 가능)</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="password" required>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password 확인</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="password2" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">전화번호</label>
+            <input type="tel" class="form-control" id="exampleInputPassword1" name="tel" required pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" maxlength="13" placeholder="010-****-****">
+        </div>
+        <input type="hidden" class="form-control" id="exampleInputPassword1" name="address" required value="tmpaddress">
+
+        <!--            등급-->
+        <div class="mb-3">
+            <input type="hidden" class="form-control" id="exampleInputPassword1" name="grade" required value="D">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">보물 1호는?</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" name="answer" required>
+        </div>
+
+    </form>
 </div>
 {{>mustache/layouts/footer}}
