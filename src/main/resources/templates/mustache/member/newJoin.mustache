@@ -53,7 +53,7 @@
 
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">전화번호</label>
-            <input type="tel" class="form-control" id="exampleInputPassword1" name="tel" required>
+            <input type="tel" class="form-control" id="exampleInputPassword1" name="tel" required pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" maxlength="13" placeholder="010-****-****">
         </div>
              <input type="hidden" class="form-control" id="exampleInputPassword1" name="address" required value="tmpaddress">
 
