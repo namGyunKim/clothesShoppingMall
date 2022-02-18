@@ -1,15 +1,18 @@
 {{>mustache/layouts/header}}
-{{#kateList}}
-
-    <div class="container obj1">
-        <div class="card" style="float:left;margin-top: 5px;margin-right: 5px">
-            <img src="/images/{{title}}.jpg" class="imgg">
-            <div class="card-body" style="text-align: center">
-                <h5 class="card-title">{{title}}</h5>
-                <button type="button" class="btn btn-primary" onclick="location.href='/coffee/basket/latte/{{id}}'">장바구니에 추가</button>
+<div class="container">
+    <div class="row row-cols-4">
+        {{#kateList}}
+            <div class="card col" style="float:left;margin-top: 5px;margin-right: 5px">
+                <img src="/images/{{title}}.jpg" class="imgg">
+                <div class="card-body" style="text-align: center">
+                    <h5 class="card-title">{{title}}</h5>
+                    <button type="button" class="btn btn-primary" onclick="location.href='/coffee/basket/latte/{{id}}'">
+                        장바구니에 추가
+                    </button>
+                </div>
             </div>
-        </div>
-    </div>
 
-{{/kateList}}
+        {{/kateList}}
+    </div>
+</div>
 {{>mustache/layouts/footer}}
