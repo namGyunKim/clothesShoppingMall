@@ -116,4 +116,10 @@ public class CMemberService {
         }
     }
 
+    public void MemberEdit(Model model,HttpSession httpSession){
+        String thisId = (String) httpSession.getAttribute("userId");
+        CMember cMember = cMemberRepository.findById(thisId).orElse(null);
+        model.addAttribute("memberInfo", cMember);
+    }
+
 }

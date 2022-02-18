@@ -1,0 +1,42 @@
+{{>mustache/layouts/header}}
+{{>mustache/layouts/infoSide}}
+<!-- 9단길이의 첫번째 열 -->
+<div class="col-md-9">
+    {{#memberInfo}}
+    <div class="jumbotron">
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="password" required value="{{password}}">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">전화번호</label>
+            <input type="tel" class="form-control" id="exampleInputPassword1" name="tel" required value="{{tel}}">
+        </div>
+
+        <div class="row">
+            <input type="text" readonly id="addr1" name="address1" class="form-control col-md-1 ml-1">
+            <input type="text" readonly id="addr2" name="address2" class="form-control col-md-5" value="{{address}}">
+            <input type="text" id="addr3" name="address3" class="form-control col-md-1">
+            <br>
+            <button type="button" onclick="daumPost()" class="btn btn-primary">
+                주소찾기
+            </button>
+        </div>
+
+        <!--            등급-->
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">회원님의 등급</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" name="grade" readonly required value="D">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">보물 1호는?</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" name="answer" required value="{{answer}}">
+        </div>
+        <button type="button" class="btn btn-primary" onclick="location.href='/';">메인화면</button>
+    </div>
+    {{/memberInfo}}
+
+</div>
+</div>
+{{>mustache/layouts/footer}}

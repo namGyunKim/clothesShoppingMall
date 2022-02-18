@@ -132,4 +132,10 @@ public class CMemberController {
         return "redirect:/login";
     }
 
+    @RequestMapping("/member/edit")
+    public String memberEdit(Model model,HttpSession httpSession){
+        cMemberService.MemberEdit(model,httpSession);
+        return "mustache/member/edit";
+    }
+
 }
