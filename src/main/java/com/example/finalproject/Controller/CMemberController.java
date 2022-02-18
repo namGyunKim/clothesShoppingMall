@@ -59,7 +59,7 @@ public class CMemberController {
                                @RequestParam(value = "address1",required = false) String address1,
                                @RequestParam(value = "address2",required = false) String address2,
                                @RequestParam(value = "address3",required = false) String address3){
-        String address=address1+address2+"    "+address3;
+        String address=address1+"    "+address2+"    "+address3;
         dto.setAddress(address);
         log.info(String.valueOf(dto));
         String msg=cMemberService.MemberJoin(dto);

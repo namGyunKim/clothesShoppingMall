@@ -120,6 +120,14 @@ public class CMemberService {
         String thisId = (String) httpSession.getAttribute("userId");
         CMember cMember = cMemberRepository.findById(thisId).orElse(null);
         model.addAttribute("memberInfo", cMember);
+        String address = cMember.getAddress();
+        String[] array = address.split("    ");
+        model.addAttribute("address1",array[0]);
+        model.addAttribute("address2",array[1]);
+        model.addAttribute("address3",array[2]);
+        log.info(array[0]);
+        log.info(array[1]);
+        log.info(array[2]);
     }
 
 }
