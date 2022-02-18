@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -59,6 +60,23 @@ public class AdminController {
         List<Clothes> clothesList = clothesRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
         model.addAttribute("clothesList", clothesList);
         return "mustache/admin/clothesAllView";
+    }
+
+    @GetMapping("/clothes/{id}")
+    public String edit(@PathVariable Long id, Model model){
+//        수정할 데이터 가져오기
+        Clothes clothes=clothesRepository.findById(id).orElse(null);
+//        모델에 데이터 등록
+        model.addAttribute("clothes",clothes);
+//        뷰 페이지 설정
+        return "mustache/admin/clothesEdit";
+    }
+
+    @RequestMapping("/clothes/edit2")
+    public String editClothes2(ClothesDto clothesDto, RedirectAttributes rttr){
+        adminService.addClothes(clothesDto);
+        rttr.addFlashAttribute("msg","상품수정 완료");
+        return "redirect:/clothes/index";
     }
 
 }

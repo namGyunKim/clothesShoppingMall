@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface ClothesRepository extends CrudRepository<Clothes,String> {
+public interface ClothesRepository extends CrudRepository<Clothes,Long> {
 
     @Override
     List<Clothes> findAll();

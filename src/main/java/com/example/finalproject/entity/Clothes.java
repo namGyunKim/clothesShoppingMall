@@ -14,7 +14,7 @@ public class Clothes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //DB가 알아서 1,2,3 자동생성 어노테이션
-    private String id;
+    private Long id;
     @Column
     private String title;
     @Column

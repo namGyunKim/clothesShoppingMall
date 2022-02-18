@@ -1,0 +1,42 @@
+{{>mustache/layouts/header}}
+{{#clothes}}
+<div class="container"><br>
+    <h1>상품등록</h1>
+    <form action="/clothes/edit2" method="post">
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">상품 ID</label>
+            <input type="text" class="form-control" name="id" required value="{{id}}" readonly>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">상품명 입력</label>
+            <input type="text" class="form-control" name="title" required value="{{title}}">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">상품 설명</label>
+            <input type="text" class="form-control" name="content" required value="{{content}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputPrice1" class="form-label">상품 가격</label>
+            <input type="number" class="form-control" name="price" required value="{{price}}">
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="kate" id="exampleRadios1" value="티" checked>
+            <label class="form-check-label" for="exampleRadios1">
+                티
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="kate" id="exampleRadios2" value="청바지">
+            <label class="form-check-label" for="exampleRadios2">
+                청바지
+            </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-w">상품등록</button>
+
+    </form>
+</div>
+{{/clothes}}
+{{>mustache/layouts/footer}}

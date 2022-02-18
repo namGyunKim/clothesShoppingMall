@@ -9,7 +9,7 @@ import lombok.*;
 @Setter
 @ToString
 public class ClothesDto {
-    private String id;
+    private Long id;
     private String title;
     private String content;
     private int price;
