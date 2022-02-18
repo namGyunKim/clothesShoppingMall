@@ -1,6 +1,8 @@
 {{>mustache/layouts/header}}
-{{>mustache/layouts/infoSide}}
-        <!-- 9단길이의 첫번째 열 -->
+<!--패스워드 체크 후-->
+{{#passCheck}}
+    {{>mustache/layouts/infoSide}}
+    <!-- 9단길이의 첫번째 열 -->
         <div class="col-md-9">
             <div class="jumbotron">
                 <h1>정보</h1>
@@ -14,4 +16,17 @@
         </div>
     </div>
 </div>
+{{/passCheck}}
+
+
+<!--패스워드 체크 전-->
+{{^passCheck}}
+    <div class="container text-center">
+    <form method="post" action="/member/info">
+        <h1>비밀번호를 입력해주세요</h1>
+<input type="password" name="password" class="col-md-5"> <button type="submit" class="btn btn-primary">확인</button>
+    </form>
+    </div>
+
+{{/passCheck}}
 {{>mustache/layouts/footer}}

@@ -24,7 +24,8 @@ public class CMemberController {
     CMemberService cMemberService;
 
     @RequestMapping("/")
-    public String index(){
+    public String index(HttpSession httpSession){
+        httpSession.removeAttribute("passCheck");
         return "mustache/index";
     }
 
@@ -111,9 +112,10 @@ public class CMemberController {
         return "redirect:/login";
     }
 
-    @GetMapping("/member/info")
-    public String memberInfo(HttpSession httpSession,Model model){
+    @RequestMapping("/member/info")
+    public String memberInfo(HttpSession httpSession,Model model,@RequestParam(value = "password",required = false) String password){
         String thisId = (String) httpSession.getAttribute("userId");
+        cMemberService.MemeberPasswordCheck(thisId,password,httpSession);
         log.info("현재 정보 수정하려는 유저 아이디는 :"+thisId);
         CMember cMember = cMemberRepository.findById(thisId).orElse(null);
         model.addAttribute("memberInfo", cMember);

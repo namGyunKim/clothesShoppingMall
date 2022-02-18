@@ -106,4 +106,14 @@ public class CMemberService {
         session.setAttribute("deleteMsg","ok");
     }
 
+    public void MemeberPasswordCheck(String id,String password,HttpSession httpSession){
+        CMember cMember = cMemberRepository.findById(id).orElse(null);
+        if(cMember.getPassword().equals(password)){
+            httpSession.setAttribute("passCheck","ok");
+        }
+        else {
+            httpSession.removeAttribute("passCheck");
+        }
+    }
+
 }
