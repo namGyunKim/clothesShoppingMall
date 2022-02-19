@@ -7,6 +7,7 @@ import com.example.finalproject.repository.ClothesBRepository;
 import com.example.finalproject.repository.PayRecordRepository;
 import com.example.finalproject.service.PayService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.http.parser.HttpParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,12 +66,30 @@ public class PayController {
     }
 
     @RequestMapping("/payrecord")
-    public String payRecord(){
-        Payrecord payRecord = new Payrecord(null, "skarbs01@naver.com", "타이틀", 100);
+    public String payRecord(HttpSession httpSession,Model model){
+        String thisId = (String) httpSession.getAttribute("userId");
+        List<ClothesB> clothesB = clothesBRepository.orderUser(thisId);
+        String titleSum = "";
+        int priceSum=0;
+        for (int i=0;i<clothesB.size();i++){
+            titleSum+=clothesB.get(i).getTitle()+"    ";
+            priceSum+=clothesB.get(i).getPrice();
+        }
+
+        Payrecord payRecord = new Payrecord(null, thisId, titleSum, priceSum);
         log.info(String.valueOf(payRecord));
         payRecordRepository.save(payRecord);
-        return "";
+        return "mustache/index";
     }
 
+    @RequestMapping("/info/payrecord")
+    public String infoPayRecord(HttpSession httpSession,Model model){
+
+        String thisId = (String) httpSession.getAttribute("userId");
+        List<Payrecord> payrecordList = payRecordRepository.orderUser(thisId);
+        model.addAttribute("payrecordList", payrecordList);
+        log.info("주문 내역 : "+String.valueOf(payrecordList));
+        return "mustache/pay/payrecord";
+    }
 
 }
