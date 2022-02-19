@@ -22,6 +22,7 @@ public class Payrecord {
     private String title;
     @Column
     private int price;
-    /*@Column
+/*    @Column
     private Date paydate;*/
+
 }

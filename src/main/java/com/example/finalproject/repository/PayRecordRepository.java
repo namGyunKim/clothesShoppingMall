@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface PayRecordRepository extends CrudRepository<Payrecord,Long> {
@@ -20,4 +21,5 @@ public interface PayRecordRepository extends CrudRepository<Payrecord,Long> {
     @Query(value = "select * from PAYRECORD where userid= :userid",
             nativeQuery = true)
     List<Payrecord> orderUser(@Param("userid") String userid);
+
 }
