@@ -57,6 +57,7 @@ public class AdminController {
     public String newClothes2(ClothesDto clothesDto, RedirectAttributes rttr){
         adminService.addClothes(clothesDto);
         rttr.addFlashAttribute("msg","상품등록 완료");
+        log.info("상품 등록할때 입력한 정보 :"+clothesDto);
       return "redirect:/clothes/new";
     }
     @RequestMapping("/clothes/index")

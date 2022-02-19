@@ -2,17 +2,17 @@ package com.example.finalproject.Controller;
 
 
 import com.example.finalproject.entity.ClothesB;
+import com.example.finalproject.entity.Payrecord;
 import com.example.finalproject.repository.ClothesBRepository;
+import com.example.finalproject.repository.PayRecordRepository;
 import com.example.finalproject.service.PayService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
@@ -27,6 +27,8 @@ public class PayController {
     PayService payService;
     @Autowired
     ClothesBRepository clothesBRepository;
+    @Autowired
+    PayRecordRepository payRecordRepository;
 
     @GetMapping("/clothes/basket/{id}")
     public String basketTea(@PathVariable Long id, HttpSession session, Model model,HttpSession httpSession) throws UnsupportedEncodingException {
@@ -60,6 +62,14 @@ public class PayController {
                          @PathVariable String category){
         payService.basketDelete(uid, model, id,category);
         return "redirect:/go/basket";
+    }
+
+    @RequestMapping("/payrecord")
+    public String payRecord(){
+        Payrecord payRecord = new Payrecord(null, "skarbs01@naver.com", "타이틀", 100);
+        log.info(String.valueOf(payRecord));
+        payRecordRepository.save(payRecord);
+        return "";
     }
 
 

@@ -62,7 +62,7 @@ public class CMemberController {
                                @RequestParam(value = "address3",required = false) String address3){
         String address=address1+"    "+address2+"    "+address3;
         dto.setAddress(address);
-        log.info(String.valueOf(dto));
+        log.info("회원가입할때 입력한 정보 :"+String.valueOf(dto));
         String msg=cMemberService.MemberJoin(dto);
         rttr.addFlashAttribute("msg", msg);
         return  "redirect:/";
