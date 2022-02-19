@@ -3,6 +3,7 @@ package com.example.finalproject.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -22,6 +23,8 @@ public class Payrecord {
     private String title;
     @Column
     private int price;
+    @Column
+    private LocalDateTime paydate;
 /*    @Column
     private Date paydate;*/
 

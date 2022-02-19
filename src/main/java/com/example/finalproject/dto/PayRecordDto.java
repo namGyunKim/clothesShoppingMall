@@ -3,6 +3,7 @@ package com.example.finalproject.dto;
 import com.example.finalproject.entity.Payrecord;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -15,9 +16,9 @@ public class PayRecordDto {
     private String userid;
     private String title;
     private int price;
-    private Date paydate;
+    private LocalDateTime paydate;
 
     public Payrecord toEntity(){
-        return new Payrecord(id,userid,title,price);
+        return new Payrecord(id,userid,title,price,paydate);
     }
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -75,8 +76,8 @@ public class PayController {
             titleSum+=clothesB.get(i).getTitle()+"    ";
             priceSum+=clothesB.get(i).getPrice();
         }
-
-        Payrecord payRecord = new Payrecord(null, thisId, titleSum, priceSum);
+        LocalDateTime localDateTime=LocalDateTime.now();
+        Payrecord payRecord = new Payrecord(null, thisId, titleSum, priceSum,localDateTime);
         log.info(String.valueOf(payRecord));
         payRecordRepository.save(payRecord);
         return "mustache/index";
