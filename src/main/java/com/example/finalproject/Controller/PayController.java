@@ -9,6 +9,7 @@ import com.example.finalproject.service.PayService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.http.parser.HttpParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,8 @@ import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -73,7 +76,7 @@ public class PayController {
         String titleSum = "";
         int priceSum=0;
         for (int i=0;i<clothesB.size();i++){
-            titleSum+=clothesB.get(i).getTitle()+"    ";
+            titleSum+=clothesB.get(i).getTitle()+"("+clothesB.get(i).getCount()+")    ";
             priceSum+=clothesB.get(i).getPrice();
         }
         LocalDateTime localDateTime=LocalDateTime.now();

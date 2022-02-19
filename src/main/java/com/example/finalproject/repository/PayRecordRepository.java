@@ -18,7 +18,7 @@ public interface PayRecordRepository extends CrudRepository<Payrecord,Long> {
 
     List<Payrecord> findAll(Sort id);
 
-    @Query(value = "select * from PAYRECORD where userid= :userid",
+    @Query(value = "select * from PAYRECORD where userid= :userid order by PAYDATE",
             nativeQuery = true)
     List<Payrecord> orderUser(@Param("userid") String userid);
 

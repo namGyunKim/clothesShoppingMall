@@ -16,7 +16,7 @@ public interface ClothesBRepository extends CrudRepository<ClothesB,Long> {
 
     List<ClothesB> findAll(Sort id);
 
-    @Query(value = "select * from CLOTHESB where userid= :userid",
+    @Query(value = "select * from CLOTHESB where userid= :userid order by ID",
             nativeQuery = true)
     List<ClothesB> orderUser(@Param("userid") String userid);
 }
