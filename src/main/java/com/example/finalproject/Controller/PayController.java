@@ -48,4 +48,19 @@ public class PayController {
         model.addAttribute("basketList", basketList);
         return "mustache/pay/basket";
     }
+    @GetMapping("/clothes/basket/add/{uid}/{id}/{category}")
+    public String add(@PathVariable String uid,Model model,@PathVariable Long id,
+                      @PathVariable String category){
+        payService.basketSum(uid, model, id,category);
+        return "redirect:/go/basket";
+    }
+
+    @GetMapping("/clothes/basket/delete/{uid}/{id}/{category}")
+    public String delete(@PathVariable String uid,Model model,@PathVariable Long id,
+                         @PathVariable String category){
+        payService.basketDelete(uid, model, id,category);
+        return "redirect:/go/basket";
+    }
+
+
 }

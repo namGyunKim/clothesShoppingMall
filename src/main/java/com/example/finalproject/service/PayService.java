@@ -8,8 +8,10 @@ import com.example.finalproject.repository.ClothesRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -45,4 +47,57 @@ public class PayService {
             log.info(String.valueOf(saved));
         }
     }
+
+    public void basketSum(String uid, Model model, Long id,String category){
+        //      리스트 가져옴
+        List<ClothesB> clothesBList=clothesBRepository.orderUser(uid);
+        Clothes coffees = clothesRepository.findById(id).orElse(null);
+        int price=0;
+        int price2=coffees.getPrice();
+
+//        처음부터 끝까지 돌려서 해당 유저의 해당 커피id를찾아낸다!
+        for(int i=0;i<clothesBList.size();i++){
+            if(clothesBList.get(i).getUserid().equals(uid) && clothesBList.get(i).getId().equals(id)){
+                price=clothesBList.get(i).getPrice();
+                ClothesB saved=new ClothesB(id,uid, clothesBList.get(i).getTitle(), clothesBList.get(i).getContent(), price + price2,category,clothesBList.get(i).getCount()+1);
+                clothesBRepository.save(saved);
+                log.info(String.valueOf(price));
+                log.info(String.valueOf(price2));
+                log.info(String.valueOf(saved));
+            }
+        }
+
+        model.addAttribute("basketList", clothesBList);
+    }
+
+    public void basketDelete(String uid,Model model,Long id,String category){
+        //      리스트 가져옴
+        List<ClothesB> clothesBList=clothesBRepository.orderUser(uid);
+        ClothesB clothesB = clothesBRepository.findById(id).orElse(null);
+        Clothes clothes = clothesRepository.findById(id).orElse(null);
+        int price=0;
+        int price2=clothes.getPrice();
+        log.info(String.valueOf(clothesB));
+        log.info(String.valueOf(clothesBList));
+        log.info(String.valueOf(id));
+//        해당 상품 -1
+        if(clothesB.getPrice() >clothes.getPrice()){
+            for(int i=0;i<clothesBList.size();i++){
+                if(clothesBList.get(i).getUserid().equals(uid) && clothesBList.get(i).getId().equals(id)){
+                    price=clothesBList.get(i).getPrice();
+                    ClothesB saved=new ClothesB(id,uid, clothesBList.get(i).getTitle(), clothesBList.get(i).getContent(), price - price2,category,clothesBList.get(i).getCount()-1);
+                    clothesBRepository.save(saved);
+                    log.info(String.valueOf(price));
+                    log.info(String.valueOf(price2));
+                    log.info(String.valueOf(saved));
+                }
+            }
+        }
+        else {
+            clothesBRepository.deleteById(id);
+        }
+
+        model.addAttribute("basketList", clothesBList);
+    }
+
 }
