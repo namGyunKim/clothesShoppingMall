@@ -60,7 +60,7 @@ $(function(){
             const deleteCookie = function (name) { document.cookie = name + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;'; }
             deleteCookie('totalsum3');
             //성공시 이동할 페이지
-            location.href="/info/payrecord";
+            location.href="/payrecord";
             msg = '결제에 성공하였습니다.';
             alert(msg);
         } else {
