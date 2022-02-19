@@ -25,13 +25,14 @@ public class PayService {
         log.info(userId);
 //      entity 생성
         Clothes clothes = clothesRepository.findById(id).orElse(null);
+        int price=clothes.getPrice();
         log.info(String.valueOf(clothes));
         //존재한다면 갯수 증가
         if(clothesBRepository.existsById(id)){
             ClothesB clothesB = clothesBRepository.findById(id).orElse(null);
-            ClothesB clothesBEntity = new ClothesB(id,userId, clothes.getTitle(), clothes.getContent(), clothes.getPrice(),clothes.getKate(),clothesB.getCount());
+            log.info("개당 가격 : "+price);
+            ClothesB clothesBEntity = new ClothesB(id,userId, clothes.getTitle(), clothes.getContent(), clothesB.getPrice()+price,clothes.getKate(),clothesB.getCount()+1);
             log.info(String.valueOf(clothesB));
-            clothesBEntity.setPrice(clothesBEntity.getPrice()+clothes.getPrice());
             log.info(String.valueOf(clothesBEntity));
             ClothesB saved = clothesBRepository.save(clothesBEntity);
             log.info(String.valueOf(saved));

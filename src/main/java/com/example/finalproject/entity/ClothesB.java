@@ -13,7 +13,6 @@ import javax.persistence.*;
 public class ClothesB {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //DB가 알아서 1,2,3 자동생성 어노테이션
     private Long id;
     @Column
     private String userid;
