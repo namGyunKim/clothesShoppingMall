@@ -22,10 +22,10 @@ $(function(){
         pg : 'kakaopay',
         pay_method : 'card',
         merchant_uid : 'merchant_' + new Date().getTime(),
-        name : '오서김 결제',
+        name : '의류쇼핑몰 결제',
         amount : price, /* ${sessionScope.totalPrice}, */
         buyer_email : 'khy@naver.com' ,/*'<%=email%>',*/
-        buyer_name : '지율',/* '<%=name%>',*/
+        buyer_name : '고객님',/* '<%=name%>',*/
         buyer_tel : '010333333',/*'<%=phone%>',*/
         buyer_addr : '수원시',/*'<%=address%>',*/
         buyer_postcode : '123-456',
@@ -60,7 +60,9 @@ $(function(){
             const deleteCookie = function (name) { document.cookie = name + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;'; }
             deleteCookie('totalsum3');
             //성공시 이동할 페이지
-            location.href="/coffee/basketorder/"+payUserID;
+            location.href="/info/payrecord";
+            msg = '결제에 성공하였습니다.';
+            alert(msg);
         } else {
             msg = '결제에 실패하였습니다.';
             msg += '에러내용 : ' + rsp.error_msg;
@@ -68,7 +70,7 @@ $(function(){
             const deleteCookie = function (name) { document.cookie = name + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;'; }
             deleteCookie('totalsum3');
             //실패시 이동할 페이지
-            location.href="/coffee/basketorder/"+payUserID;
+            location.href="/";
             alert(msg);
         }
     });

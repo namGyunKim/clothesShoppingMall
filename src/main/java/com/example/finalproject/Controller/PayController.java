@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -94,6 +96,30 @@ public class PayController {
         model.addAttribute("payrecordList", payrecordList);
         log.info("주문 내역 : "+String.valueOf(payrecordList));
         return "mustache/pay/payrecord";
+    }
+
+    @RequestMapping("/kakaopay")
+    public String kakaoPay(String uid,HttpServletResponse response, HttpSession httpSession){
+        String thisId = (String) httpSession.getAttribute("userId");
+        List<ClothesB> clothesB = clothesBRepository.orderUser(thisId);
+        int priceSum=0;
+        for (int i=0;i<clothesB.size();i++){
+            priceSum+=clothesB.get(i).getPrice();
+        }
+//        userId세션 받아옴
+        String payUserId= (String) httpSession.getAttribute("userId");
+
+
+        //userid쿠키생성
+        Cookie cookie2=new Cookie("userID",String.valueOf(payUserId));
+        cookie2.setMaxAge(60*60*24);
+        response.addCookie(cookie2);
+
+        //쿠키생성
+        Cookie cookie=new Cookie("totalsum3",String.valueOf(priceSum));
+        cookie.setMaxAge(60*60*24);
+        response.addCookie(cookie);
+        return "mustache/pay/kakao";
     }
 
 }
