@@ -6,9 +6,11 @@
                 <img src="/images/{{title}}.jpg" class="imgg">
                 <div class="card-body" style="text-align: center">
                     <h5 class="card-title">{{title}}</h5>
+                    {{#userId}}
                     <button type="button" class="btn btn-primary" onclick="location.href='/coffee/basket/latte/{{id}}'">
                         장바구니에 추가
                     </button>
+                    {{/userId}}
                 </div>
             </div>
 

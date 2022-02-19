@@ -40,19 +40,18 @@
             {{#userId}}
                 <button type="button" class="btn btn-primary ml-3" onclick="location.href='/logout';">로그아웃</button>
                 <button type="button" class="btn btn-primary ml-3" onclick="location.href='/coffee/basketorder/{{userId}}'">장바구니로 이동</button>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                        주문 메뉴
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                        <a class="dropdown-item" href="/clothes/kate/티">티</a>
-                        <a class="dropdown-item" href="/clothes/kate/청바지">청바지</a>
-
-                    </div>
-                </li>
             {{/userId}}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                    카테고리별 메뉴
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
+                    <a class="dropdown-item" href="/clothes/kate/티">티</a>
+                    <a class="dropdown-item" href="/clothes/kate/청바지">청바지</a>
+
+                </div>
+            </li>
 
         </ul>
     </div>
