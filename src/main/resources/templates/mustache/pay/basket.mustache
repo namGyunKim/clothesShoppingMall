@@ -1,0 +1,36 @@
+<style>
+    .bimg {
+        width: 50px;
+        height: 50px;
+    }
+
+</style>
+{{>mustache/layouts/header}}
+<div class="container"><br>
+    <h1>장바구니</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>상품이미지</th>
+            <th>상품명</th>
+            <th>상품설명</th>
+            <th>상품가격</th>
+            <th>수량</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#basketList}}
+            <tr>
+                <th><img src="/images/{{title}}.jpg" class="rounded-circle bimg" alt="이미지 파일 없음"> </th>
+                <td style="vertical-align: middle;">{{title}}</td>
+                <td style="vertical-align: middle;">{{content}}</td>
+                <td style="vertical-align: middle;">{{price}}</td>
+                <td style="text-align: left;vertical-align: middle;">
+                    <button type="button" class="btn btn-primary btn-w" onclick="location.href='/coffee/basket/add/{{userId}}/{{id}}'">+1</button>
+                    <button type="button" class="btn btn-primary btn-w" onclick="location.href='/coffee/basket/delete/{{userId}}/{{id}}'">-1</button>
+                </td>
+            </tr>
+        {{/basketList}}
+        </tbody>
+    </table>
+{{>mustache/layouts/footer}}
