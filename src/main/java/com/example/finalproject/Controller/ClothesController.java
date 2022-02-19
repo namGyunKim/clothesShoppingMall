@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class ClothesController {
 
 
     @RequestMapping("clothes/kate/{kate}")
-    public String clothesKate(@PathVariable(value = "kate",required = false)String kate, Model model){
+    public String clothesKate(@PathVariable(value = "kate",required = false)String kate, Model model, HttpSession httpSession){
         //        모든 상품 목록을 가져온다
         List<Clothes> clothesList = clothesRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
         List<Clothes> kateList=new ArrayList<>();
@@ -33,6 +34,8 @@ public class ClothesController {
         }
         log.info(String.valueOf(clothesList));
         log.info(String.valueOf(kateList));
+        log.info(kate);
+        httpSession.setAttribute("category", kate);
         model.addAttribute("kateList", kateList);
         return "mustache/clothes/clothesKate";
     }
