@@ -73,14 +73,16 @@ public class PayController {
     @GetMapping("/clothes/basket/add/{uid}/{id}/{category}")
     public String add(@PathVariable String uid,Model model,@PathVariable Long id,
                       @PathVariable String category){
+        log.info("장바구니 +1");
         payService.basketSum(uid, model, id,category);
         return "redirect:/go/basket";
     }
 
-    @GetMapping("/clothes/basket/delete/{uid}/{id}/{category}")
+    @GetMapping("/clothes/basket/delete/{uid}/{id}/{category}/{basketid}")
     public String delete(@PathVariable String uid,Model model,@PathVariable Long id,
-                         @PathVariable String category){
-        payService.basketDelete(uid, model, id,category);
+                         @PathVariable String category,
+                         @PathVariable Long basketid){
+        payService.basketDelete(uid, model, id,category,basketid);
         return "redirect:/go/basket";
     }
 
