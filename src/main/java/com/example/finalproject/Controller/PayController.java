@@ -85,8 +85,7 @@ public class PayController {
     @RequestMapping("/payrecord")
     public String payRecord(HttpSession httpSession,Model model){
         String thisId = (String) httpSession.getAttribute("userId");
-
-        payService.payRecord(thisId);
+        payService.payRecord(thisId,httpSession);
         return "mustache/index";
     }
 
@@ -108,6 +107,9 @@ public class PayController {
         for (int i=0;i<clothesB.size();i++){
             priceSum+=clothesB.get(i).getPrice();
         }
+        double discount= payService.discount(httpSession);
+        int discount2= (int) (priceSum*discount);
+        priceSum= priceSum-discount2;
 //        userId세션 받아옴
         String payUserId= (String) httpSession.getAttribute("userId");
 

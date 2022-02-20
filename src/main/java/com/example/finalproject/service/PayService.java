@@ -109,7 +109,7 @@ public class PayService {
         model.addAttribute("basketList", clothesBList);
     }
 
-    public void payRecord(String thisId) {
+    public void payRecord(String thisId,HttpSession httpSession) {
         List<ClothesB> clothesB = clothesBRepository.orderUser(thisId);
         String titleSum = "";
         int priceSum = 0;
@@ -117,6 +117,9 @@ public class PayService {
             titleSum += clothesB.get(i).getTitle() + "(" + clothesB.get(i).getCount() + ")    ";
             priceSum += clothesB.get(i).getPrice();
         }
+        double discount = discount(httpSession);
+        int discount2= (int) (priceSum*discount);
+        priceSum=priceSum-discount2;
         LocalDateTime localDateTime = LocalDateTime.now();
         Payrecord payRecord = new Payrecord(null, thisId, titleSum, priceSum, localDateTime);
         log.info(String.valueOf(payRecord));
