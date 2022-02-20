@@ -159,4 +159,23 @@ public class PayService {
         }
         return sum;
     }
+
+    public double discount(HttpSession httpSession){
+        String thisId = (String) httpSession.getAttribute("userId");
+        CMember cMember = cMemberRepository.findById(thisId).orElse(null);
+        String thisGrade=cMember.getGrade();
+
+        if (thisGrade.equals("A")){
+            return 0.2;
+        }
+        else if(thisGrade.equals("B")){
+            return 0.1;
+        }
+        else if(thisGrade.equals("C")){
+            return 0.05;
+        }
+        else {
+            return 0;
+        }
+    }
 }

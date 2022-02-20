@@ -61,6 +61,11 @@ public class PayController {
         model.addAttribute("basketList", basketList);
         int priceSum = payService.clothesBSum(basketList);
         model.addAttribute("priceSum",priceSum);
+        double discount= payService.discount(httpSession);
+        int discount2= (int) (priceSum*discount);
+        int resultSum=priceSum-discount2;
+        model.addAttribute("discount", discount2);
+        model.addAttribute("resultSum", resultSum);
         return "mustache/pay/basket";
     }
     @GetMapping("/clothes/basket/add/{uid}/{id}/{category}")
