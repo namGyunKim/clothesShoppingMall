@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -42,8 +43,9 @@ public class PayController {
     CMemberRepository cMemberRepository;
 
     @GetMapping("/clothes/basket/{id}")
-    public String basketTea(@PathVariable Long id, HttpSession session, Model model,HttpSession httpSession) throws UnsupportedEncodingException {
-        payService.addClothes(id,session);
+    public String basketTea(@PathVariable Long id, HttpSession session, Model model, HttpSession httpSession, RedirectAttributes rttr) throws UnsupportedEncodingException {
+        String thisId = (String) httpSession.getAttribute("userId");
+        payService.addClothes(id,session,thisId,rttr);
         String userId = (String) httpSession.getAttribute("userId");
         String category = (String) httpSession.getAttribute("category");
         log.info("category의 값은 : "+category);

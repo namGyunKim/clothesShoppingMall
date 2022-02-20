@@ -11,6 +11,7 @@ import lombok.*;
 @ToString
 public class ClothesBDto {
     private Long id;
+    private Long clothesid;
     private String userid;
     private String title;
     private String content;
@@ -19,6 +20,6 @@ public class ClothesBDto {
     private int count;
 
     public ClothesB toEntity(){
-        return new ClothesB(id,userid, title, content, price, kate,count);
+        return new ClothesB(id,clothesid,userid, title, content, price, kate,count);
     }
 }
