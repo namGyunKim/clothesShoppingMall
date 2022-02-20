@@ -1,16 +1,21 @@
 package com.example.finalproject.service;
 
 
+import com.example.finalproject.entity.CMember;
 import com.example.finalproject.entity.Clothes;
 import com.example.finalproject.entity.ClothesB;
+import com.example.finalproject.entity.Payrecord;
+import com.example.finalproject.repository.CMemberRepository;
 import com.example.finalproject.repository.ClothesBRepository;
 import com.example.finalproject.repository.ClothesRepository;
+import com.example.finalproject.repository.PayRecordRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -21,6 +26,10 @@ public class PayService {
     ClothesRepository clothesRepository;
     @Autowired
     ClothesBRepository clothesBRepository;
+    @Autowired
+    CMemberRepository cMemberRepository;
+    @Autowired
+    PayRecordRepository payRecordRepository;
 
     public void addClothes(Long id, HttpSession session){
         String userId=(String)session.getAttribute("userId");
@@ -100,4 +109,46 @@ public class PayService {
         model.addAttribute("basketList", clothesBList);
     }
 
+    public void payRecord(String thisId) {
+        List<ClothesB> clothesB = clothesBRepository.orderUser(thisId);
+        String titleSum = "";
+        int priceSum = 0;
+        for (int i = 0; i < clothesB.size(); i++) {
+            titleSum += clothesB.get(i).getTitle() + "(" + clothesB.get(i).getCount() + ")    ";
+            priceSum += clothesB.get(i).getPrice();
+        }
+        LocalDateTime localDateTime = LocalDateTime.now();
+        Payrecord payRecord = new Payrecord(null, thisId, titleSum, priceSum, localDateTime);
+        log.info(String.valueOf(payRecord));
+        payRecordRepository.save(payRecord);
+        List<Payrecord> payrecordList = payRecordRepository.orderUser(thisId);
+        int grade = 0;
+        for (int i = 0; i < payrecordList.size(); i++) {
+            grade += payrecordList.get(i).getPrice();
+        }
+        CMember cMember = cMemberRepository.findById(thisId).orElse(null);
+        log.info("지금 로그인중인 멤버 정보 : " + cMember);
+        log.info("총 주문 금액: " + grade);
+        String thisPassword = cMember.getPassword();
+        String thisTel = cMember.getTel();
+        String thisAddress = cMember.getAddress();
+        String thisAnswer = cMember.getAnswer();
+        if (grade >= 5000000) {
+            CMember cMember2 = new CMember(thisId, thisPassword, thisTel, thisAddress, "A", thisAnswer);
+            log.info(String.valueOf(cMember2));
+            cMemberRepository.save(cMember2);
+            log.info("A등급");
+        } else if (grade >= 500000) {
+            CMember cMember2 = new CMember(thisId, thisPassword, thisTel, thisAddress, "B", thisAnswer);
+            log.info(String.valueOf(cMember2));
+            cMemberRepository.save(cMember2);
+            log.info("B등급");
+        } else if (grade >= 50000) {
+            CMember cMember2 = new CMember(thisId, thisPassword, thisTel, thisAddress, "C", thisAnswer);
+            log.info(String.valueOf(cMember2));
+            cMemberRepository.save(cMember2);
+            log.info("C등급");
+        }
+
+    }
 }

@@ -78,47 +78,8 @@ public class PayController {
     @RequestMapping("/payrecord")
     public String payRecord(HttpSession httpSession,Model model){
         String thisId = (String) httpSession.getAttribute("userId");
-        List<ClothesB> clothesB = clothesBRepository.orderUser(thisId);
-        String titleSum = "";
-        int priceSum=0;
-        for (int i=0;i<clothesB.size();i++){
-            titleSum+=clothesB.get(i).getTitle()+"("+clothesB.get(i).getCount()+")    ";
-            priceSum+=clothesB.get(i).getPrice();
-        }
-        LocalDateTime localDateTime=LocalDateTime.now();
-        Payrecord payRecord = new Payrecord(null, thisId, titleSum, priceSum,localDateTime);
-        log.info(String.valueOf(payRecord));
-        payRecordRepository.save(payRecord);
-        List<Payrecord> payrecordList = payRecordRepository.orderUser(thisId);
-        int grade=0;
-        for (int i=0;i<payrecordList.size();i++){
-            grade+=payrecordList.get(i).getPrice();
-        }
-        CMember cMember = cMemberRepository.findById(thisId).orElse(null);
-        log.info("지금 로그인중인 멤버 정보 : "+cMember);
-        log.info("총 주문 금액: "+grade);
-        String thisPassword=cMember.getPassword();
-        String thisTel=cMember.getTel();
-        String thisAddress=cMember.getAddress();
-        String thisAnswer=cMember.getAnswer();
-        if(grade>=5000000) {
-            CMember cMember2 = new CMember(thisId, thisPassword, thisTel, thisAddress, "A", thisAnswer);
-            log.info(String.valueOf(cMember2));
-            cMemberRepository.save(cMember2);
-            log.info("A등급");
-        }
-        else if(grade>=500000) {
-            CMember cMember2 = new CMember(thisId, thisPassword, thisTel, thisAddress, "B", thisAnswer);
-            log.info(String.valueOf(cMember2));
-            cMemberRepository.save(cMember2);
-            log.info("B등급");
-        }
-        else if(grade>=50000) {
-            CMember cMember2 = new CMember(thisId, thisPassword, thisTel, thisAddress, "C", thisAnswer);
-            log.info(String.valueOf(cMember2));
-            cMemberRepository.save(cMember2);
-            log.info("C등급");
-        }
+
+        payService.payRecord(thisId);
         return "mustache/index";
     }
 
