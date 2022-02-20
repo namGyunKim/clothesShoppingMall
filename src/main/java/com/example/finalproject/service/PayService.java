@@ -135,7 +135,7 @@ public class PayService {
         String thisTel = cMember.getTel();
         String thisAddress = cMember.getAddress();
         String thisAnswer = cMember.getAnswer();
-        if (grade >= 5000000) {
+        if (grade >= 2000000) {
             CMember cMember2 = new CMember(thisId, thisPassword, thisTel, thisAddress, "A", thisAnswer);
             log.info(String.valueOf(cMember2));
             cMemberRepository.save(cMember2);
