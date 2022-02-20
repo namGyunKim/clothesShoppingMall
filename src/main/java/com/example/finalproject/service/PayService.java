@@ -151,4 +151,12 @@ public class PayService {
         }
 
     }
+
+    public int clothesBSum(List<ClothesB> clothesBList){
+        int sum=0;
+        for (int i=0;i<clothesBList.size();i++){
+            sum+=clothesBList.get(i).getPrice();
+        }
+        return sum;
+    }
 }

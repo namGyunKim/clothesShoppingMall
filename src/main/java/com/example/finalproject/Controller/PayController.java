@@ -59,6 +59,8 @@ public class PayController {
         String userId = (String) httpSession.getAttribute("userId");
         List<ClothesB> basketList = clothesBRepository.orderUser(userId);
         model.addAttribute("basketList", basketList);
+        int priceSum = payService.clothesBSum(basketList);
+        model.addAttribute("priceSum",priceSum);
         return "mustache/pay/basket";
     }
     @GetMapping("/clothes/basket/add/{uid}/{id}/{category}")

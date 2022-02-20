@@ -25,7 +25,5 @@ public class Payrecord {
     private int price;
     @Column
     private LocalDateTime paydate;
-/*    @Column
-    private Date paydate;*/
 
 }
