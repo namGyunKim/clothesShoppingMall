@@ -22,7 +22,8 @@
             <div class="card col" style="float:left;margin-top: 5px;margin-right: 5px">
                 <img src="/images/{{title}}.jpg" class="imgg">
                 <div class="card-body" style="text-align: center">
-                    <h5 class="card-title">{{title}}</h5>
+                    <h5 class="card-title">{{title}} 재고수량 : {{stock}}</h5>
+                    <h5>사이즈: {{clothessize}}</h5>
                     {{#userId}}
                     <button type="button" class="btn btn-primary" onclick="location.href='/clothes/basket/{{id}}'">
                         장바구니에 추가
