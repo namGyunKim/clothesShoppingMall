@@ -113,7 +113,7 @@ public class PayService {
         String titleSum = "";
         int priceSum = 0;
         for (int i = 0; i < clothesB.size(); i++) {
-            titleSum += clothesB.get(i).getTitle() + "(" + clothesB.get(i).getCount() + ")    ";
+            titleSum += clothesB.get(i).getTitle() +clothesB.get(i).getPrice()/clothesB.get(i).getCount()+"원"+ "(" + clothesB.get(i).getCount() + ")    ";
             priceSum += clothesB.get(i).getPrice();
 //            옷 상품 정보
             Clothes clothes = clothesRepository.findById(clothesB.get(i).getClothesid()).orElse(null);

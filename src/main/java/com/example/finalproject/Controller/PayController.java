@@ -107,6 +107,13 @@ public class PayController {
         List<Payrecord> payrecordList = payRecordRepository.orderUser(thisId);
         model.addAttribute("payrecordList", payrecordList);
         log.info("주문 내역 : "+String.valueOf(payrecordList));
+        String discount222="";
+        CMember cMember = cMemberRepository.findById(thisId).orElse(null);
+        if (cMember.getGrade().equals("D")) discount222 = "할인율 0%";
+        else if (cMember.getGrade().equals("C")) discount222 = "할인율 5%";
+        else if (cMember.getGrade().equals("B")) discount222 = "할인율 10%";
+        else discount222 = "할인율 20%";
+        model.addAttribute("thisdiscount", discount222);
         return "mustache/pay/payrecord";
     }
 
