@@ -33,7 +33,7 @@ public class AdminService {
 //        상품 삭제
         clothesRepository.deleteById(id);
 //        휴지통에 추가
-        ClothesG clothesG = new ClothesG(id, clothes.getTitle(), clothes.getContent(), clothes.getPrice(),clothes.getKate());
+        ClothesG clothesG = new ClothesG(id, clothes.getTitle(), clothes.getContent(), clothes.getPrice(),clothes.getKate(),clothes.getClothessize(),clothes.getGender(),clothes.getStock());
         log.info(String.valueOf(clothesG));
         ClothesG saved = clothesGRepository.save(clothesG);
     }
@@ -45,7 +45,7 @@ public class AdminService {
 //        휴지통에서 삭제
         clothesGRepository.deleteById(id);
 //        상품 목록에 복구
-        Clothes clothes = new Clothes(id, clothesG.getTitle(), clothesG.getContent(), clothesG.getPrice(),clothesG.getKate());
+        Clothes clothes = new Clothes(id, clothesG.getTitle(), clothesG.getContent(), clothesG.getPrice(),clothesG.getKate(),clothesG.getClothessize(),clothesG.getGender(),clothesG.getStock());
         log.info(String.valueOf(clothes));
         Clothes saved = clothesRepository.save(clothes);
     }

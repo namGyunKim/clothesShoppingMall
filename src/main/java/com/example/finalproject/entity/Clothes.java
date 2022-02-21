@@ -23,4 +23,10 @@ public class Clothes {
     private int price;
     @Column
     private String kate;
+    @Column
+    private String clothessize;
+    @Column
+    private String gender;
+    @Column
+    private int stock;
 }

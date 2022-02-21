@@ -12,17 +12,23 @@
             <th scope="col">상품설명</th>
             <th scope="col">상품가격</th>
             <th scope="col">카테고리</th>
+            <th scope="col">사이즈</th>
+            <th scope="col">성별</th>
+            <th scope="col">재고수량</th>
         </tr>
         </thead>
         <tbody>
         {{#clothesList}}
             <tr>
-                <th><a href="/clothes/delete/{{id}}"> {{id}}</a></th>
+                <th style="vertical-align: middle"><a href="/clothes/delete/{{id}}"> {{id}}</a></th>
                 <th style="vertical-align: middle"><img src="/images/{{title}}.jpg" class="rounded-circle bimg" alt="이미지 파일 없음"> </th>
-                <td> {{title}}</td>
-                <td>{{content}}</td>
-                <td>{{price}}</td>
-                <td>{{kate}}</td>
+                <td style="vertical-align: middle"> {{title}}</td>
+                <td style="vertical-align: middle">{{content}}</td>
+                <td style="vertical-align: middle">{{price}}</td>
+                <td style="vertical-align: middle">{{kate}}</td>
+                <td style="vertical-align: middle">{{clothessize}}</td>
+                <td style="vertical-align: middle">{{gender}}</td>
+                <td style="vertical-align: middle">{{stock}}</td>
             </tr>
         {{/clothesList}}
         </tbody>

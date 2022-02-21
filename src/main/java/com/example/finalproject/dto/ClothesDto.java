@@ -14,8 +14,11 @@ public class ClothesDto {
     private String content;
     private int price;
     private String kate;
+    private String clothessize;
+    private String gender;
+    private int stock;
 
     public Clothes toEntity(){
-        return new Clothes(id, title, content, price, kate);
+        return new Clothes(id, title, content, price, kate,clothessize,gender,stock);
     }
 }
