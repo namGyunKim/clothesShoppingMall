@@ -2,10 +2,12 @@ package com.example.finalproject.Controller;
 
 
 import com.example.finalproject.entity.CMember;
+import com.example.finalproject.entity.Clothes;
 import com.example.finalproject.entity.ClothesB;
 import com.example.finalproject.entity.Payrecord;
 import com.example.finalproject.repository.CMemberRepository;
 import com.example.finalproject.repository.ClothesBRepository;
+import com.example.finalproject.repository.ClothesRepository;
 import com.example.finalproject.repository.PayRecordRepository;
 import com.example.finalproject.service.PayService;
 import lombok.extern.slf4j.Slf4j;
@@ -41,6 +43,8 @@ public class PayController {
     PayRecordRepository payRecordRepository;
     @Autowired
     CMemberRepository cMemberRepository;
+    @Autowired
+    ClothesRepository clothesRepository;
 
     @GetMapping("/clothes/basket/{id}")
     public String basketTea(@PathVariable Long id, HttpSession session, Model model, HttpSession httpSession, RedirectAttributes rttr) throws UnsupportedEncodingException {
@@ -107,12 +111,19 @@ public class PayController {
     }
 
     @RequestMapping("/kakaopay")
-    public String kakaoPay(String uid,HttpServletResponse response, HttpSession httpSession){
+    public String kakaoPay(String uid,HttpServletResponse response, HttpSession httpSession,RedirectAttributes rttr){
+
         String thisId = (String) httpSession.getAttribute("userId");
         List<ClothesB> clothesB = clothesBRepository.orderUser(thisId);
         int priceSum=0;
         for (int i=0;i<clothesB.size();i++){
             priceSum+=clothesB.get(i).getPrice();
+//            재고수량보다 많은걸주문한다면
+            Clothes clothes = clothesRepository.findById(clothesB.get(i).getClothesid()).orElse(null);
+            if (clothesB.get(i).getCount() > clothes.getStock()){
+                rttr.addFlashAttribute("msg", clothes.getTitle() + "상품의 재고수량이 부족합니다");
+                return "redirect:/go/basket";
+            }
         }
         double discount= payService.discount(httpSession);
         int discount2= (int) (priceSum*discount);
