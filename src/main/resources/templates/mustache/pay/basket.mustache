@@ -16,6 +16,9 @@
             <th>상품설명</th>
             <th>상품가격</th>
             <th>수량</th>
+            <th>사이즈</th>
+            <th>성별</th>
+            <th>주문량 조절</th>
         </tr>
         </thead>
         <tbody>
@@ -26,6 +29,8 @@
                 <td style="vertical-align: middle;">{{content}}</td>
                 <td style="vertical-align: middle;">{{price}}</td>
                 <td style="vertical-align: middle;">{{count}}</td>
+                <td style="vertical-align: middle;">{{clothessize}}</td>
+                <td style="vertical-align: middle;">{{gender}}</td>
                 <td style="text-align: left;vertical-align: middle;">
                     <button type="button" class="btn btn-primary btn-w" onclick="location.href='/clothes/basket/add/{{userId}}/{{clothesid}}/{{kate}}'">+1</button>
                     <button type="button" class="btn btn-primary btn-w" onclick="location.href='/clothes/basket/delete/{{userId}}/{{clothesid}}/{{kate}}/{{id}}'">-1</button>

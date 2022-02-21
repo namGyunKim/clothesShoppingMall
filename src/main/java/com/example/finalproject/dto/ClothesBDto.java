@@ -18,8 +18,10 @@ public class ClothesBDto {
     private int price;
     private String kate;
     private int count;
+    private String clothessize;
+    private String gender;
 
     public ClothesB toEntity(){
-        return new ClothesB(id,clothesid,userid, title, content, price, kate,count);
+        return new ClothesB(id,clothesid,userid, title, content, price, kate,count,clothessize,gender);
     }
 }

@@ -47,7 +47,7 @@ public class PayService {
         }
 //        장바구니에 존재하지 않는다면 저장
         else {
-            ClothesB clothesB = new ClothesB(null,id,userId, clothes.getTitle(), clothes.getContent(), clothes.getPrice(),clothes.getKate(),1);
+            ClothesB clothesB = new ClothesB(null,id,userId, clothes.getTitle(), clothes.getContent(), clothes.getPrice(),clothes.getKate(),1,clothes.getClothessize(),clothes.getGender());
             log.info(String.valueOf(clothesB));
             ClothesB saved = clothesBRepository.save(clothesB);
             log.info(String.valueOf(saved));
@@ -67,7 +67,7 @@ public class PayService {
             if(clothesBList.get(i).getUserid().equals(uid) && clothesBList.get(i).getClothesid().equals(id)){
                 price=clothesBList.get(i).getPrice();
                 log.info("장바구니 +1 세이브 전");
-                ClothesB saved=new ClothesB(clothesBList.get(i).getId(),id,uid, clothesBList.get(i).getTitle(), clothesBList.get(i).getContent(), price + price2,category,clothesBList.get(i).getCount()+1);
+                ClothesB saved=new ClothesB(clothesBList.get(i).getId(),id,uid, clothesBList.get(i).getTitle(), clothesBList.get(i).getContent(), price + price2,category,clothesBList.get(i).getCount()+1,clothesBList.get(i).getClothessize(),clothesBList.get(i).getGender());
                 clothesBRepository.save(saved);
                 log.info("+1 된 장바구니 상품 정보 :"+saved);
                 log.info(String.valueOf(price));
@@ -93,7 +93,7 @@ public class PayService {
             for(int i=0;i<clothesBList.size();i++){
                 if(clothesBList.get(i).getUserid().equals(uid) && clothesBList.get(i).getClothesid().equals(id)){
                     price=clothesBList.get(i).getPrice();
-                    ClothesB saved=new ClothesB(clothesBList.get(i).getId(),id,uid, clothesBList.get(i).getTitle(), clothesBList.get(i).getContent(), price - price2,category,clothesBList.get(i).getCount()-1);
+                    ClothesB saved=new ClothesB(clothesBList.get(i).getId(),id,uid, clothesBList.get(i).getTitle(), clothesBList.get(i).getContent(), price - price2,category,clothesBList.get(i).getCount()-1,clothesBList.get(i).getClothessize(),clothesBList.get(i).getGender());
                     clothesBRepository.save(saved);
                     log.info(String.valueOf(price));
                     log.info(String.valueOf(price2));

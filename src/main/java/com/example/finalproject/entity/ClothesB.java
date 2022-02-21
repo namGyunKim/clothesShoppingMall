@@ -29,4 +29,8 @@ public class ClothesB {
     private String kate;
     @Column
     private int count;
+    @Column
+    private String clothessize;
+    @Column
+    private String gender;
 }

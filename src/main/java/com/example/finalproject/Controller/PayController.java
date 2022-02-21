@@ -58,8 +58,10 @@ public class PayController {
 
     @RequestMapping("/go/basket")
     public String goBasket(HttpSession httpSession,Model model){
+        log.info("gobasket도착");
         String userId = (String) httpSession.getAttribute("userId");
         List<ClothesB> basketList = clothesBRepository.orderUser(userId);
+        log.info("basketList :"+basketList);
         model.addAttribute("basketList", basketList);
         int priceSum = payService.clothesBSum(basketList);
         model.addAttribute("priceSum",priceSum);
@@ -68,6 +70,7 @@ public class PayController {
         int resultSum=priceSum-discount2;
         model.addAttribute("discount", discount2);
         model.addAttribute("resultSum", resultSum);
+        log.info("gobasket에서 이동하기 직전");
         return "mustache/pay/basket";
     }
     @GetMapping("/clothes/basket/add/{uid}/{id}/{category}")
