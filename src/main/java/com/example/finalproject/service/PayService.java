@@ -115,6 +115,10 @@ public class PayService {
         for (int i = 0; i < clothesB.size(); i++) {
             titleSum += clothesB.get(i).getTitle() + "(" + clothesB.get(i).getCount() + ")    ";
             priceSum += clothesB.get(i).getPrice();
+//            옷 상품 정보
+            Clothes clothes = clothesRepository.findById(clothesB.get(i).getClothesid()).orElse(null);
+            Clothes updated = new Clothes(clothes.getId(), clothes.getTitle(), clothes.getContent(), clothes.getPrice(), clothes.getKate(), clothes.getClothessize(), clothes.getGender(), clothes.getStock() - clothesB.get(i).getCount());
+            clothesRepository.save(updated);
         }
         double discount = discount(httpSession);
         int discount2= (int) (priceSum*discount);
