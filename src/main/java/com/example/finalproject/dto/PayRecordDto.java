@@ -17,8 +17,9 @@ public class PayRecordDto {
     private String title;
     private int price;
     private LocalDateTime paydate;
+    private String address;
 
     public Payrecord toEntity(){
-        return new Payrecord(id,userid,title,price,paydate);
+        return new Payrecord(id,userid,title,price,paydate,address);
     }
 }

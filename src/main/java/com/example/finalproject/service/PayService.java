@@ -124,7 +124,8 @@ public class PayService {
         int discount2= (int) (priceSum*discount);
         priceSum=priceSum-discount2;
         LocalDateTime localDateTime = LocalDateTime.now();
-        Payrecord payRecord = new Payrecord(null, thisId, titleSum, priceSum, localDateTime);
+        CMember cMember = cMemberRepository.findById(thisId).orElse(null);
+        Payrecord payRecord = new Payrecord(null, thisId, titleSum, priceSum, localDateTime,cMember.getAddress());
         log.info(String.valueOf(payRecord));
         payRecordRepository.save(payRecord);
         List<Payrecord> payrecordList = payRecordRepository.orderUser(thisId);
@@ -132,7 +133,6 @@ public class PayService {
         for (int i = 0; i < payrecordList.size(); i++) {
             grade += payrecordList.get(i).getPrice();
         }
-        CMember cMember = cMemberRepository.findById(thisId).orElse(null);
         log.info("지금 로그인중인 멤버 정보 : " + cMember);
         log.info("총 주문 금액: " + grade);
         String thisPassword = cMember.getPassword();

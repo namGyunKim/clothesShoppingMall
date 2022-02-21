@@ -25,5 +25,7 @@ public class Payrecord {
     private int price;
     @Column
     private LocalDateTime paydate;
+    @Column
+    private String address;
 
 }

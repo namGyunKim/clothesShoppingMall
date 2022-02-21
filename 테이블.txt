@@ -52,5 +52,6 @@ create table payrecord(
     userid varchar2(50),
     title varchar2(200),
     price number(10),
-    paydate date default sysdate
+    paydate date default sysdate,
+    address varchar2(200)
 );
