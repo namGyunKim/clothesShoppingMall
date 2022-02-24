@@ -20,4 +20,7 @@ admin@admin.com
 
 상품삭제시 장바구니 등에서도 삭제하기전에 프로젝트 끝남
 
-나머지 기본기능들은 잘 작동
+나머지 기본기능들은 잘 작동 할인 비율 오작동버그 있음
+
+아래 이미지 클릭시 시연영상 재생
+[![Video Label](http://img.youtube.com/vi/w0fH7CH5kyQ/0.jpg)](https://youtu.be/w0fH7CH5kyQ)
